@@ -1,0 +1,28 @@
+<div class="container" fxLayout="column" fxLayoutGap="10px">
+    <div fxFlex>
+        <div>
+            <h3>menu</h3>
+            <hr/>
+        </div>
+    </div>
+
+    <div fxFlex>
+        <mat-grid-list cols="2" rowHeight="200px" *ngIf="dishes">
+            <mat-grid-tile class="mat-grid-tile" *ngFor="let dish of dishes" [routerLink]="['/dishdetail', dish.id]" appHighlight>
+                <img src="{{ BaseURL + dish.image }}" alt="dish.name" title="{{dish.name}}" height="200px" />
+                <mat-grid-tile-footer>
+                    <h1>{{dish.name | uppercase}}</h1>
+                </mat-grid-tile-footer>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+
+    <div [hidden]="dishes || errMsg">
+        <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
+    </div>
+
+    <div fxFlex *ngIf="errMsg">
+        <h2>Error</h2>
+        <p>{{ errMsg }}</p>
+    </div>
+</div>
